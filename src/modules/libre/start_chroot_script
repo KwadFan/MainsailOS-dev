@@ -18,7 +18,7 @@ echo_red "Libre DEBUG script"
 
 # ls /etc/apt/sources.list.d
 
-cat /etc/resolv.conf
+echo "nameserver 1.1.1.1" > /etc/resolv.conf
 
 ping -c1 deb.debian.org
 

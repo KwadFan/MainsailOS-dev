@@ -26,3 +26,9 @@ echo_green "Libre LePotato DNS Workaround ... [CLEANUP]"
 ## Step 1: remove temporary DNS servers
 rm -f /etc/resolv.conf
 ## END Step 1
+
+## Step 2: Possible work around due unmount failure
+echo_green "Initialized sync ..."
+sync && echo_green "sync completed ..."
+sleep 10
+## END Step 2

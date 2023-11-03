@@ -30,5 +30,5 @@ echo "nameserver 8.8.4.4" >> /etc/resolv.conf
 ## END Step 1
 
 ## Step 2: enable sshd by default
-systemctl_if_exist enable ssh.service
+systemctl_if_exists enable ssh.service
 ## END Step 2

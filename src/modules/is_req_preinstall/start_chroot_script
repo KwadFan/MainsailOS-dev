@@ -30,6 +30,12 @@ install_cleanup_trap
 
 echo_green "Install Input Shaper requirements ..."
 
+## Bookworm workaround
+if grep -cq "bookworm" /etc/os-release; then
+    IS_REQ_PREINSTALL_PIP="numpy<=1.24.2"
+    export IS_REQ_PREINSTALL_PIP
+fi
+
 ### install all deps at once for time consumption reasons.
 ## APT: Update Repo Database and install Dependencies
 # Force apt update

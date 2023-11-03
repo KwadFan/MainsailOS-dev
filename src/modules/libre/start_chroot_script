@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+#### Libre DNS workaround
+####
+#### Written by Stephan Wendel aka KwadFan <me@stephanwe.de>
+#### Copyright 2021
+#### https://github.com/mainsail-crew/MainsailOS
+####
+#### This File is distributed under GPLv3
+####
+
+# shellcheck enable=require-variable-braces
+
+## Source error handling, leave this in place
+set -Ee
+
+## Set LC_ALL to prevent errors
+export LC_ALL=C
+
+## Source CustomPIOS common.sh
+# shellcheck disable=SC1091
+source /common.sh
+install_cleanup_trap
+
+echo_green "Libre LePotato DNS Workaround ..."
+
+## Step 1: add temporary DNS servers
+echo "nameserver 1.1.1.1" > /etc/resolv.conf
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+## END Step 1
+
+## Step 2: enable sshd by default
+systemctl_if_exists enable ssh.service
+## END Step 2
+
+## Step 3: install libre packages
+apt_update_skip
+# Disabling shellcheck SC2086, because we want "wordsplitting"
+# shellcheck disable=SC2086
+check_install_pkgs ${LIBRE_DEPS}
+## END Step 3
+
+## Step 4: enable highspeed UART5
+echo_green "Trying to enable highspeed UART5 (uart-a-clk81) ..."
+if command -v ldto; then
+    VENDOR=libre-computer BOARD=aml-s905x-cc \
+    ldto merge uart-a-clk81
+else
+    echo_red "command 'ldto' not found ... [SKIPPED]"
+fi
+## END Step 4
+
+## Step 5: enable spi
+echo_green "Trying to enable SPI (spicc-cs1 spicc-cs1-spidev) ..."
+if command -v ldto; then
+    VENDOR=libre-computer BOARD=aml-s905x-cc \
+    ldto merge spicc-cs1 spicc-cs1-spidev
+else
+    echo_red "command 'ldto' not found ... [SKIPPED]"
+fi
+## END Step 5

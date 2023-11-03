@@ -43,6 +43,7 @@ check_install_pkgs ${LIBRE_DEPS}
 ## Step 4: enable highspeed UART5
 echo_green "Trying to enable highspeed UART5 (uart-a-clk81) ..."
 if command -v ldto; then
+    VENDOR=libre-computer BOARD=aml-s905x-cc \
     ldto merge uart-a-clk81
 else
     echo_red "command 'ldto' not found ... [SKIPPED]"
@@ -52,6 +53,7 @@ fi
 ## Step 5: enable spi
 echo_green "Trying to enable SPI (spicc-cs1 spicc-cs1-spidev) ..."
 if command -v ldto; then
+    VENDOR=libre-computer BOARD=aml-s905x-cc \
     ldto merge spicc-cs1 spicc-cs1-spidev
 else
     echo_red "command 'ldto' not found ... [SKIPPED]"

@@ -6,6 +6,10 @@
 
 # shellcheck disable=all
 
+# Download base rul
+DOWNLOAD_BASE_URL="https://distro.libre.computer/ci/"
+
+# Architecture
 BASE_ARCH="arm64"
 
 # Base User
@@ -30,6 +34,7 @@ BASE_RELEASE_COMPRESS=no
 MODULES="base,libre(pkgupgrade,udev_fix,mainsailos(net,klipper,is_req_preinstall,moonraker,timelapse,mainsail,crowsnest,sonar,password-for-sudo))"
 
 # export Variables
+export DOWNLOAD_BASE_URL
 export BASE_ADD_USER
 export BASE_USER
 export BASE_USER_PASSWORD

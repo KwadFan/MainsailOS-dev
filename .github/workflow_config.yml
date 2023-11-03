@@ -24,6 +24,8 @@ buildtest:
   # Raspberry Pi OS based images
   - raspberry/rpi32
   - raspberry/rpi64
+  - raspberry/rpi32_bookworm
+  - raspberry/rpi64_bookworm
 
 # This is used to setup release build chain.
 # Each entry will be used in setup matrix for releases
